@@ -2,7 +2,6 @@ package net.url.shortener.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,6 +16,7 @@ public class Link {
     @SequenceGenerator(name = "link_id_generator", sequenceName = "seq_link_id")
     private Long id;
     private String link;
+    @Column(unique = true)
     private String shortLink;
     private LocalDateTime createdDate;
 

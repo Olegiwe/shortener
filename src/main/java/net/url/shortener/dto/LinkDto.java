@@ -12,4 +12,5 @@ public class LinkDto {
     private Long id;
     private String link;
     private String shortLink;
+
 }
