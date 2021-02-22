@@ -14,7 +14,7 @@ public class Link {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "link_id_generator")
-    @SequenceGenerator(name = "link_id_generator", sequenceName = "link_id_seq")
+    @SequenceGenerator(name = "link_id_generator", sequenceName = "seq_link_id")
     private Long id;
     private String link;
     private String shortLink;

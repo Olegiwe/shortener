@@ -15,8 +15,26 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <querydsl.version>4.4.0</querydsl.version>
+        <flyway.version>7.5.3</flyway.version>
+        <postgres.user>postgres</postgres.user>
+        <postgres.password>postgres</postgres.password>
+        <postgres.url>jdbc:postgresql://localhost:5432/postgres?currentSchema=shortener </postgres.url>
     </properties>
     <dependencies>
+
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -75,7 +93,7 @@
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
+                            <artifactId>lombok</artifactId>link
                         </exclude>
                     </excludes>
                 </configuration>
@@ -85,13 +103,30 @@
 			<plugin>
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
-				<version>7.5.3</version>
+				<version>${flyway.version}</version>
 				<configuration>
-					<user>postgres</user>
-					<password>postgres</password>
-					<url>jdbc:postgresql://localhost:5432/postgres?currentSchema=shortener</url>
+					<user>${postgres.user}</user>
+					<password>${postgres.password}</password>
+					<url>${postgres.url}</url>
 				</configuration>
 			</plugin>
+
+            <plugin>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>apt-maven-plugin</artifactId>
+                <version>1.1.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/generated-sources/java</outputDirectory>
+                            <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
         </plugins>
     </build>
