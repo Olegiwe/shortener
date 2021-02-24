@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class LinkDto {
 
     private Long id;
-    private String link;
+    private String fullLink;
     private String shortLink;
+    private Boolean isExpired;
 }
